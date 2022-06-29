@@ -26,15 +26,16 @@ class TestTimelinePost(unittest.TestCase):
         assert second_post.id == 2
 
         #TODO: Get timeline posts and assert that they are correct
-        #Check that second post comes before first post
         posts = get_time_line_post()["timeline_posts"]
-        assert posts[0]['id'] == 2
-        assert posts[0]['name'] == 'Jane Doe'
-        assert posts[0]['email'] == 'jane@example.com'
-        assert posts[0]['content'] == 'Hello world, I\'m Jane!'
-
-        assert posts[1]['id'] == 1
-        assert posts[1]['name'] == 'John Doe'
-        assert posts[1]['email'] == 'john@example.com'
-        assert posts[1]['content'] == 'Hello world, I\'m John!'
+        for post in posts:
+            if posts[0]['id'] == 2:
+                assert posts[0]['name'] == 'Jane Doe'
+                assert posts[0]['email'] == 'jane@example.com'
+                assert posts[0]['content'] == 'Hello world, I\'m Jane!'
+            elif posts[1]['id'] == 1:
+                assert posts[1]['name'] == 'John Doe'
+                assert posts[1]['email'] == 'john@example.com'
+                assert posts[1]['content'] == 'Hello world, I\'m John!'
+        
+        assert posts[0]['created_at'] >= posts[1]['created_at']
     
